@@ -7,13 +7,16 @@ CXXFLAGS+= -O3 -DSEQAN_ENABLE_TESTING=0 -DSEQAN_ENABLE_DEBUG=0 -DSEQAN_HAS_ZLIB=
 LDLIBS=-lz -lssl -lcrypto 
 
 
-TARGET = bamhash_checksum_bam bamhash_checksum_fastq
+TARGET = bamhash_checksum_bam bamhash_checksum_fastq bamhash_checksum_all
 all: $(TARGET)
 
 bamhash_checksum_bam: bamhash_checksum_common.o bamhash_checksum_bam.o
 	 $(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS) 
 
 bamhash_checksum_fastq: bamhash_checksum_common.o bamhash_checksum_fastq.o
+	 $(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+bamhash_checksum_all: bamhash_checksum_common.o bamhash_checksum_all.o
 	 $(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 clean:
